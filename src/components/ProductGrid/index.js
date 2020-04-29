@@ -1,11 +1,18 @@
-import React from 'react'
-import { useStaticQuery,  graphql, Link } from 'gatsby'
-import { Flex, Box } from '@rebass/grid/emotion'
+import React, { useContext } from 'react'
+import { useStaticQuery, graphql, Link } from 'gatsby'
 
-import { Img } from '../../utils/styles'
+import StoreContext from '~/context/StoreContext'
+import {
+  Grid,
+  Product,
+  Title,
+  PriceTag
+} from './styles'
+import { Img } from '~/utils/styles'
 
 const ProductGrid = () => {
-  const data = useStaticQuery(
+  const { store: {checkout} } = useContext(StoreContext)
+  const { allShopifyProduct } = useStaticQuery(
     graphql`
       query {
         allShopifyProduct(
@@ -41,24 +48,30 @@ const ProductGrid = () => {
     `
   )
 
+  const getPrice = price => Intl.NumberFormat(undefined, {
+    currency: checkout.currencyCode ? checkout.currencyCode : 'EUR',
+    minimumFractionDigits: 2,
+    style: 'currency',
+  }).format(parseFloat(price ? price : 0))
+
   return (
-    <Flex flexWrap='wrap' mx={-2}>
-      {data.allShopifyProduct.edges.map(x => (
-        <Box
-        width={[1, 1 / 2, 1 / 3]}
-        px={2}
-        key={x.node.id}
-        >
-          <Link to={`/product/${x.node.handle}/`}>
-            <Img
-              fluid={x.node.images[0].localFile.childImageSharp.fluid}
-              alt={x.node.handle}
-            />
-          </Link>
-          <p>{x.node.title}</p>
-        </Box>
-      ))}
-    </Flex>
+    <Grid>
+      {allShopifyProduct.edges
+        ? allShopifyProduct.edges.map(({ node: { id, handle, title, images: [firstImage], variants: [firstVariant] } }) => (
+          <Product key={id} >
+            <Link to={`/product/${handle}/`}>
+              {firstImage && firstImage.localFile &&
+                (<Img
+                  fluid={firstImage.localFile.childImageSharp.fluid}
+                  alt={handle}
+                />)}
+            </Link>
+            <Title>{title}</Title>
+            <PriceTag>{getPrice(firstVariant.price)}</PriceTag>
+          </Product>
+        ))
+        : <p>No Products found!</p>}
+    </Grid>
   )
 }
 

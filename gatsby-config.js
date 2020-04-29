@@ -1,6 +1,9 @@
+const path = require('path')
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Shopify Starter`,
@@ -32,7 +35,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-shopify2`,
+      resolve: `gatsby-source-shopify`,
       options: {
         // The domain name of your Shopify shop. This is required.
         // Example: 'gatsby-source-shopify-test-shop' if your Shopify address is
@@ -52,6 +55,12 @@ module.exports = {
         // much time was required to fetch and process the data.
         // Defaults to true.
         verbose: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-root-import',
+      options: {
+        '~': path.join(__dirname, 'src/'),
       },
     },
     {

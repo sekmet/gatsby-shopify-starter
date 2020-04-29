@@ -1,6 +1,6 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <h1 align="center">
-  <img alt="Gatsby" src="ressources/shopify+gatsby.png" height="60px" />
+  <img alt="Gatsby" src="resources/shopify+gatsby.png" height="60px" />
   <br/>
   Gatsby Shopify starter
 </h1>
@@ -13,6 +13,8 @@ This starter also includes credentials to a Shopify demo store so you can try it
 
 If you have questions feel free to message me on [Twitter](https://twitter.com/alexanderhorl) 🤙🏻
 
+Checkout [nureineburg.de](https://nureineburg.de) for a real public shop built with this starter, the code is also [public](https://github.com/AlexanderProd/nureineburg.de/).  
+
 ## 💎 Features
 
 - Cart
@@ -20,12 +22,20 @@ If you have questions feel free to message me on [Twitter](https://twitter.com/a
 - Product page
 - Dynamic Inventory Checking
 - Image optimization with Gatsby Image
-- CSS in JS with Emotion
+- Styled Components with Emotion
 - Google Analytics
 - SEO
 
 ### 📦 Dynamic Inventory Checking
 The Shopify product inventory is being checked in realtime, therefore no rebuilding and redeploy is needed when a product goes out of stock. This avoids problems where products could still be available even though they're out of stock due to redeploy delay.
+
+### 🖌 Styling
+I'm using [Emotion](https://emotion.sh/docs/introduction) as styled components library, but the starter is purposely only sparsely styled so you don't have to remove unecessary code but can instead add your own styling immediately.
+
+## ⚠️ Common problems
+
+- You need to use the Shopify Storefront API credentials not the regular Shopify API.
+- You need to have at least one published product on Shopify.
 
 ## 🚀 Quick start
 
@@ -59,6 +69,8 @@ The Shopify product inventory is being checked in realtime, therefore no rebuild
 
     Open both `.env` files located in the root directory of your page end replace the credentials with your own. Don't forget to restart Gatsby for your store to be loaded!
 
+    ⚠️ Make sure to use the Shopify storefront API credentials, not the regular Shopify API!
+
 ## 🎓 Learning Gatsby
 
 Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
@@ -67,10 +79,14 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 - **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
 
+## Deploy
+
+Checkout my other open-source project [JAMStackBox](https://github.com/AlexanderProd/jam-stack-box) to continuously deploy your Gatsby site on your own server.
+
 ## 📌 ToDo
 
 I'll happily merge any pull request to improve the starter. 🙂
-- [ ] Convert Layout to function component.
+- [X] Convert Layout to function component.
 - [X] Add dynamic inventory checking to avoid re-building after every purchase. 
 - [X] Add better styling.
 - [X] Add image optimization using Gatsby sharp plugin.
